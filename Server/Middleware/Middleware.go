@@ -84,3 +84,25 @@ func HandleNotRoute(c *gin.Context) {
 	//加载完 defer recover，继续后续接口调用
 	c.Abort()
 }
+func Auth(c *gin.Context) {
+	token, b := c.GetQuery("token")
+	if !b {
+		c.JSON(200, gin.H{
+			"code": "1",
+			"msg":  "请登录1",
+		})
+		c.Abort()
+	} else if fmt.Sprint(token) != "12345" {
+		fmt.Println(fmt.Sprintln(token))
+		c.JSON(200, gin.H{
+			"code": "1",
+			"msg":  "请登录2",
+		})
+		c.Abort()
+	}
+
+	c.Next()
+
+	//加载完 defer recover，继续后续接口调用
+
+}

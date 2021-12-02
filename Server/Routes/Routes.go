@@ -17,5 +17,9 @@ func SetupRouter() *gin.Engine {
 	})
 	r.GET("/login", Controller.Login)
 	r.POST("/loginpost", Controller.LoginPost)
+	v2 := r.Group("/")
+	v2.Use(Middleware.Auth)
+	v2.GET("/login2", Controller.Login2)
+
 	return r
 }

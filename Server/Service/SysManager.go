@@ -17,6 +17,21 @@ type LoginRequest struct {
 
 func DoLogin(c *gin.Context) (res ViewModel.ResultModel) {
 	var user DbModel.User
+	for i := 10; i < 20; i++ {
+		user.ID = uint(i)
+		user.Name = "name" + fmt.Sprintln(i)
+		DB.MysqlDB.Create(&user)
+	}
+
+	var db = DB.MysqlDB.Table("User").Where("ID>0")
+
+	var count int64
+	db.Count(&count)
+	fmt.Println(count)
+	var list []DbModel.User
+	db.Find(&list)
+	fmt.Println(list)
+
 	DB.MysqlDB.First(&user)
 	fmt.Println(user)
 	//panic("a yi ya")
