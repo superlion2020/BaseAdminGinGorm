@@ -1,7 +1,10 @@
 package Service
 
 import (
+	"Server/DB"
+	"Server/Models/DbModel"
 	"Server/Models/ViewModel"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,8 +16,10 @@ type LoginRequest struct {
 }
 
 func DoLogin(c *gin.Context) (res ViewModel.ResultModel) {
-
-	panic("a yi ya")
+	var user DbModel.User
+	DB.MysqlDB.First(&user)
+	fmt.Println(user)
+	//panic("a yi ya")
 	var m LoginRequest
 	// 将request的body中的数据，绑定到模型
 	if err := c.ShouldBind(&m); err != nil {
