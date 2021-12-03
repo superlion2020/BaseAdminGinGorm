@@ -11,6 +11,7 @@ func Login(c *gin.Context) {
 	c.JSON(200, res)
 }
 func Login2(c *gin.Context) {
+
 	var res ViewModel.ResultModel
 	res.Code = 1
 	res.Data = "haole"
